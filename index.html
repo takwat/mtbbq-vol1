@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/beige.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>インフラを<br>コードで管理</h1>
+					<h3>MT開発環境構築をコードで自動化</h3>
+				</section>
+				<section>
+					<h2>自己紹介</h2>
+					<ul>
+						<li class="fragment">渡邊 崇(ワタナベ タカシ)</li>
+						<li class="fragment">b.mode株式会社<br><img src="./logo.svg" style="width: 20vw; height: auto; border: none; padding: 1rem;"></li>
+						<li class="fragment">大学生だった1990年代から掲示板などのWebアプリ開発</li>
+						<li class="fragment">GitHub: <a href="https://github.com/takwat">@takwat</a></li>
+						<li class="fragment">Qiita: <a href="https://qiita.com/takwat">https://qiita.com/_takwat</a></li>
+					</ul>
+				</section>
+				<section>
+					<h2>MTに限らずLinuxサーバの環境構築あるある</h2>
+					<ul>
+						<li class="fragment">ドキュメント化されてない</li>
+						<li class="fragment">自身も記録を取らずに手探り</li>
+						<li class="fragment">問題発生と解決を対症療法的に（モグラ叩き開発）</li>
+					</ul>
+					<h3 class="fragment">作った本人も再現のできない<br><span style="color: #800000; font-weight: bold;">「秘伝のタレ」</span>の出来上がり</h3>
+				</section>
+	
+				<section>
+					<h2>「秘伝のタレ」化を<br>避ける方法</h2>
+					<h3>気軽に作って気軽に試して気軽に壊せる環境を持つ</h3>
+				</section>
+				<section>
+					<ul>
+						<li>多少のマシンパワーを仮想マシンを作れるVirtualBox</li>
+						<li class="fragment">VirtualBoxを使いやすく管理できるVagrant</li>
+						<li class="fragment">今回は詳しく説明はしませんが、最近はDockerだったりWindows Subsystems for Linux(Windows 10 Pro)など仮想化してLinuxを手元のマシンで動かすことが手軽になってきました</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>「秘伝のタレ」化を<br>避ける方法</h2>
+					<h3>ちゃんとドキュメント化・・・</h3>
+					<h3 class="fragment">ちょっと待った</h3>
+					<ul>
+						<li class="fragment">内容が正しいという保証がない</li>
+						<li class="fragment">内容が正しくても作業者によっては順番を飛ばしたりするかも？</li>
+						<li class="fragment">時間もかかる</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>考えてみれば</h2>
+					<p class="fragment">一度手順書を作ってあとは機械的に逐一実行するって実にプログラム向けじゃないですか？</p>
+				</section>
+
+				<section>
+					<h2>そんなわけで</h2>
+					<p>
+						Ansibleという構成管理ツールを使ったMovableType7の開発環境を自動で作るなにかを作ってみました
+					</p>
+					<h3 style="text-transform: none;"><a href="https://github.com/takwat/vagrant-mt7">https://github.com/takwat/vagrant-mt7</a></h3>
+					<ul>
+						<li class="fragment">ライセンスの都合でMT7本体は同梱してません</li>
+						<li class="fragment">まだREADMEすらまともにドキュメント書いてないのでMTの配置やshebangの変更ではまるポイントがあるのでちゃんと書きたい</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>使い方</h2>
+					<ul>
+						<li class="fragment">VirtualBoxとVagrantをインストール(Windows/Mac/Linux)</li>
+						<li class="fragment">GitHubからcloneして</li>
+						<li class="fragment">MTをダウンロード、public/mtに展開</li>
+						<li class="fragment">cloneしたルートでvagrant up</li>
+						<li class="fragment">ネットワーク速度やマシンパワーによって待つこと10分〜30分</li>
+					</ul>
+					<h3 class="fragment">一服してればそのうちできあがる</h3>
+				</section>
+	
+				<section>
+					<h2>応用</h2>
+					<ul>
+						<li class="fragment">一般的なLAMP環境</li>
+						<li class="fragment">Ansible自体はWindows/Mac/Linuxで共通のYAMLフォーマットで動作します</li>
+						<li class="fragment">自動構成したいマシンにAnsibleをインストールしてしまえば若干の変更だけで使いまわせます</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>MTの記述言語、Perlの父・Larry Wall曰く プログラマの三代美徳</h2>
+					<ul>
+						<li class="fragment">短気</li>
+						<li class="fragment">怠惰</li>
+						<li class="fragment">傲慢</li>
+					</ul>
+					<p class="fragment">開発環境構築は自動化で手抜きして中身の実装に注力しましょう</h2>
+				</section>
+
+				<section>
+					<h2>ありがとうございました</h2>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
